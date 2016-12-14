@@ -1,0 +1,23 @@
+{
+  "name": "raspberrytv",
+  "version": "1.0.0",
+  "description": "A little system to manage a TV on a raspberry pi with a kiosk chromium browser",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EpicKiwi/RaspberryTv.git"
+  },
+  "author": "EpicKiwi <me@epickiwi.fr>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EpicKiwi/RaspberryTv/issues"
+  },
+  "homepage": "https://github.com/EpicKiwi/RaspberryTv#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "socket.io": "^1.7.2"
+  }
+}

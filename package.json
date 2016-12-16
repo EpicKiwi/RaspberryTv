@@ -1,23 +1,27 @@
 {
   "name": "raspberrytv",
+  "description": "A simple monitor on a raspi",
   "version": "1.0.0",
-  "description": "A little system to manage a TV on a raspberry pi with a kiosk chromium browser",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/EpicKiwi/RaspberryTv.git"
-  },
   "author": "EpicKiwi <me@epickiwi.fr>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/EpicKiwi/RaspberryTv/issues"
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --inline --hot",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
-  "homepage": "https://github.com/EpicKiwi/RaspberryTv#readme",
   "dependencies": {
-    "express": "^4.14.0",
-    "socket.io": "^1.7.2"
+    "moment": "^2.17.1",
+    "vue": "^2.1.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.0.0",
+    "babel-loader": "^6.0.0",
+    "babel-preset-es2015": "^6.0.0",
+    "cross-env": "^3.0.0",
+    "css-loader": "^0.25.0",
+    "file-loader": "^0.9.0",
+    "vue-loader": "^10.0.0",
+    "vue-template-compiler": "^2.1.0",
+    "webpack": "^2.1.0-beta.25",
+    "webpack-dev-server": "^2.1.0-beta.9"
   }
 }

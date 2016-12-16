@@ -37,6 +37,7 @@ export default {
   top: 0;
   left: 0;
   font-family: "Open Sans", sans-serif;
+  cursor: none;
 }
 
 .content {

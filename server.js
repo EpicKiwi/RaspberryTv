@@ -7,4 +7,4 @@ app.get("/monitor", (req,res) => {
 	res.sendFile(__dirname+"/views/monitor.html")
 })
 
-app.listen(80);
+app.listen(8080);

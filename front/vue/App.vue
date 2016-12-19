@@ -1,5 +1,7 @@
 <template>
 <div id="app">
+  <background></background>
+  <status message-type="loading" v-show="!socketConnected"></status>
   <div class="content">
     <clock></clock>
   </div>
@@ -8,19 +10,24 @@
 
 <script>
 import clock from "./Clock.vue"
+import status from "./Status.vue"
+import background from "./Background.vue"
 
 export default {
   name: 'app',
   data() {return{
-    message: 'Bonjour webpack !'
+    socketConnected: false
   }},
   components : {
-  	"clock": clock
+  	clock,
+    status,
+    background
   },
-  methods : {
-  	change () {
-  		this.message = "Bonjour Baptiste !"
-  	}
+  sockets: {
+    connect () {
+      this.socketConnected = true;
+      console.info("Socket connected");
+    }
   }
 }
 </script>
@@ -37,6 +44,7 @@ export default {
   top: 0;
   left: 0;
   font-family: "Open Sans", sans-serif;
+  color: rgba(255,255,255,0.8);
 }
 
 .content {

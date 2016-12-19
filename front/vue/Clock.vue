@@ -49,7 +49,7 @@ export default {
 <style>
 .clock {
 	width: 100%;
-	color: rgba(255,255,255,0.8);
+  color: inherit;
 	text-align: center;
 }
 

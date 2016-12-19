@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pong</title>
+</head>
+<body>
+<h2 class="state" >Connexion...</h2>
+
+<div class="pool">
+</div>
+
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">	
+var socket = io("/monitor");
+socket.on("connect",function(){
+	$(".state").html("Socket connecté");
+})
+
+socket.on("newBackground",function(background){
+	console.log("New background",background)
+	$(".pool").append("<h3>new-background</h3><pre>"+JSON.stringify(background,null,2)+"</pre>")
+})
+</script>
+</body>
+</html>

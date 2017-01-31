@@ -2,11 +2,11 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  entry: './front/js/monitor.js',
+  entry: './front/js/medias.js',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'monitor.js'
+    filename: 'medias.js'
   },
   module: {
     rules: [

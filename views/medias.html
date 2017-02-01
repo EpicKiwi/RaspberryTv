@@ -5,8 +5,29 @@
     <title>Medias sur RaspberryTv</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <h3>Playlist</h3>
+      <ul id="playlist">
+      </ul>
+      <p class="nothing playlist">Playlist vide</p>
+      <h3>En attente</h3>
+      <ul id="pending">
+      </ul>
+      <p class="nothing pending">Aucun titre à ajouter</p>
+      <h3>Ajouter un média</h3>
+      <form id="addtrc" action="#" method="post">
+        <div id="adderr"></div>
+        <label for="url">Url </label><input type="text" name="url" id="url"/>
+        <button>Ajouter</button>
+      </form>
+      <h3>Controle du lecteur</h3>
+      <button id="play">Lecture</button>
+      <button id="pause">Pause</button>
+      <button id="stop">Stop</button>
+      <button id="skip">Passer</button>
+    </div>
     <script src="http://localhost:8080/socket.io/socket.io.js"></script>
-    <script src="/dist/medias.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="/front/js/medias.js"></script>
   </body>
 </html>

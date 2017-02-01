@@ -7,6 +7,7 @@ const monitorIo = require("./back/monitorIo")
 const mediasIo = require("./back/mediasIo")
 
 app.use("/dist",express.static(__dirname+"/dist"))
+app.use("/front",express.static(__dirname+"/front"))
 
 app.get("/", (req,res) => {
 	res.redirect('/medias');
@@ -27,6 +28,6 @@ app.get("/ping", (req,res) => {
 mediasIo.init(io);
 monitorIo.init(io);
 
-http.listen(80, () => {
+http.listen(8080, () => {
 	console.info("Server started on *:8080")
 });

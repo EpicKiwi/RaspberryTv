@@ -10,6 +10,7 @@ var providers = [
 
 var tracks = [];
 var pendingTracks = [];
+var emitter = new EventEmitter();
 
 function Track(url){
 	this.baseurl = url
@@ -30,13 +31,13 @@ function Track(url){
 	}
 
 	this.requestInfos = function(callback) {
-		ytdl.exec(this.baseurl,["-F"],{},(err,output) => {
+		ytdl.exec(this.baseurl,["--no-check-certificate","-F"],{},(err,output) => {
 			if(err){
 				callback(err)
 				return;
 			}
 			this.formatId = output[output.length-1].replace(/([^ ]+) +.*/,"$1")
-			ytdl.exec(this.baseurl,["-gef",this.formatId],{},(err,output) => {
+			ytdl.exec(this.baseurl,["--no-check-certificate","-gef",this.formatId],{},(err,output) => {
 				if(err){
 					callback(err)
 					return;
@@ -54,36 +55,35 @@ function Track(url){
 function addTrack(url){
 	var thistrack = new Track(url);
 	pendingTracks.push(thistrack)
+	emitter.emit("pending-playlist-changed",pendingTracks)
+	emitter.emit("added-pending-track",thistrack)
 	thistrack.requestInfos((err,track) => {
 		if(err){
 			err.track = thistrack
-			module.exports.emit("requesting-error",err)
+			emitter.emit("requesting-error",err)
 			console.error(err)
 			var index = pendingTracks.indexOf(thistrack)
-			if(index != -1)
+			if(index != -1){
 				pendingTracks.splice(index,1)
+				emitter.emit("pending-playlist-changed",pendingTracks)
+				emitter.emit("removed-pending-track",thistrack)
+			}
 			return;
 		}
 		var index = pendingTracks.indexOf(thistrack)
-		if(index != -1)
+		if(index != -1){
 			pendingTracks.splice(index,1)
+			emitter.emit("pending-playlist-changed",pendingTracks)
+			emitter.emit("removed-pending-track",thistrack)
+		}
 		tracks.push(thistrack)
-		module.exports.emit("playlist-changed",tracks)
-		module.exports.emit("added-track",thistrack)
+		emitter.emit("playlist-changed",tracks)
+		emitter.emit("added-track",thistrack)
 	})
 }
 
-class PlaylistEmitter extends EventEmitter {
-	getTracks(){
-		return tracks
-	}
-	getPendingTracks(){
-		return pendingTracks
-	}
-}
-
-var pe = new PlaylistEmitter()
-pe.Track = Track
-pe.addTrack = addTrack
-
-module.exports = pe
+exports.Track = Track
+exports.events = emitter
+exports.addTrack = addTrack
+exports.getTracks = function(){return tracks;}
+exports.getPendingTracks = function(){return pendingTracks;}
